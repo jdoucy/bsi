@@ -1,0 +1,18 @@
+version: "3.9"
+name: "bsi"
+services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: passpass
+    volumes:
+      - ./sql/common.sql:/docker-entrypoint-initdb.d/common.sql
+      - ./dontsave/pgdata :/var/lib/postgresql/data
+    networks:
+      - bsi
+networks:
+  bsi:
+    name: bsi
